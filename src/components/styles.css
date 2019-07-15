@@ -7,7 +7,7 @@ body {
   position: relative;
   padding-bottom: 56.2%;
 }
-.video-responsive iframe{
+.video-responsive iframe {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -44,13 +44,12 @@ body {
   background-color: #fff !important;
 }
 
-.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
+.navbar-default .navbar-toggle:focus,
+.navbar-default .navbar-toggle:hover {
   background-color: #542683;
 }
 
 .headerWrapper {
-  border-bottom: 1px solid rgb(212, 218, 223);
-  box-shadow: rgba(116, 129, 141, 0.1) 0px 1px 1px 0px;
   display: flex;
   align-items: center;
 }
@@ -73,6 +72,13 @@ body {
   padding-right: 10px;
 }
 
+/* .navBarWrapper {
+  top: 0;
+  left: 0;
+  z-index: 999;
+  position: sticky;
+} */
+
 /* Header section starts here */
 .navBarDefault {
   background-color: #372476;
@@ -82,10 +88,6 @@ body {
   border: 0;
   display: flex;
   align-items: center;
-  box-shadow: -1px 0px 4px 1px rgba(175,158,232,.4);
-  -webkit-box-shadow: -1px 0px 4px 1px rgba(175,158,232,.4);
-  -moz-box-shadow: -1px 0px 4px 1px rgba(175,158,232,.8);
-  -o-box-shadow: -1px 0px 4px 1px rgba(175,158,232,.4);
   z-index: 1;
   padding: 15px;
 }
@@ -99,7 +101,6 @@ body {
   padding: 0px 0px;
   display: flex;
   align-items: center;
-
 }
 
 .navBarBrand img {
@@ -116,13 +117,11 @@ body {
   line-height: 1em;
   opacity: 1;
 }
-.navBarUL
-{
+.navBarUL {
   display: flex;
   align-items: center;
 }
-.navBarUL li a img
-{
+.navBarUL li a img {
   width: 20px;
 }
 .mainWrapper {
@@ -130,14 +129,15 @@ body {
   max-width: 750px;
 }
 .navBarUL li a:hover {
-  opacity: .7;
+  opacity: 0.7;
 }
 pre {
   border: 0 !important;
   background-color: rgb(245, 247, 249); /* !important; */
 }
 
-.mainWrapper ul, .mainWrapper ol {
+.mainWrapper ul,
+.mainWrapper ol {
   -webkit-padding-start: 40px;
   -moz-padding-start: 40px;
   -o-padding-start: 40px;
@@ -145,7 +145,8 @@ pre {
   padding: 0px 0px 0px 2em;
 }
 
-.mainWrapper ul li, .mainWrapper ol li {
+.mainWrapper ul li,
+.mainWrapper ol li {
   font-size: 16px;
   line-height: 1.8;
   font-weight: 400;
@@ -202,7 +203,7 @@ pre {
   padding: 7px 24px 7px 16px;
   border-left: 1px solid #e6ecf1;
   border-left-color: rgb(230, 236, 241);
-  color: #9DAAB6;
+  color: #9daab6;
 }
 
 .rightSideBarUL {
@@ -246,7 +247,7 @@ pre {
 
 .subLevel.active {
   color: rgb(116, 76, 188);
-  border-color: rgb(230,236,241) !important;
+  border-color: rgb(230, 236, 241) !important;
   border-style: solid none solid solid;
   border-width: 1px 0px 1px 1px;
   background-color: #fff;
@@ -407,47 +408,58 @@ pre {
   flex: 1 1 0%;
 }
 
-.nextBtn:hover, .previousBtn:hover {
+.nextBtn:hover,
+.previousBtn:hover {
   color: rgb(116, 76, 188);
   text-decoration: none;
   border: 1px solid rgb(116, 76, 188);
 }
 
-.nextBtn:hover .rightArrow, .previousBtn:hover .leftArrow {
+.nextBtn:hover .rightArrow,
+.previousBtn:hover .leftArrow {
   color: rgb(116, 76, 188);
 }
 
 /* tables.css */
 table {
-padding: 0; }
+  padding: 0;
+}
 
 table tr {
   border-top: 1px solid #cccccc;
   background-color: white;
   margin: 0;
-padding: 0; }
+  padding: 0;
+}
 
 table tr:nth-child(2n) {
-  background-color: #f8f8f8; }
+  background-color: #f8f8f8;
+}
 
 table tr th {
   font-weight: bold;
   border: 1px solid #cccccc;
   text-align: left;
   margin: 0;
-padding: 6px 13px; }
+  padding: 6px 13px;
+}
 
 table tr td {
   border: 1px solid #cccccc;
   text-align: left;
   margin: 0;
-padding: 6px 13px; }
+  padding: 6px 13px;
+}
 
-table tr th :first-child, table tr td :first-child {
-margin-top: 0; }
+table tr th :first-child,
+table tr td :first-child {
+  margin-top: 0;
+}
 
-table tr th :last-child, table tr td :last-child {
-margin-bottom: 0; }
+table tr th :last-child,
+table tr td :last-child {
+  margin-bottom: 0;
+}
 /* end - tables.css */
 
 /* Image styling */
@@ -492,7 +504,7 @@ img {
 
   .navBarBrand {
     font-size: 20px;
-    padding: 15px
+    padding: 15px;
   }
 
   .titleWrapper {
@@ -524,5 +536,43 @@ img {
   .mobileView {
     text-align: left !important;
     padding-left: 0 !important;
+  }
+}
+
+.sponsor {
+  color: pink;
+  color: #aaa;
+  font-size: 13px;
+  float: right;
+}
+
+@media (max-width: 767px) {
+  .sponsor {
+    float: left;
+    padding-left: 15px;
+  }
+}
+
+.sponsor-name {
+  color: white;
+}
+
+span.code {
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.footer {
+  padding-top: 20px;
+}
+/* make the heart beat */
+.beat {
+  animation: beat 0.25s infinite alternate;
+  transform-origin: center;
+}
+
+/* Heart beat animation */
+@keyframes beat {
+  to {
+    transform: scale(1.4);
   }
 }

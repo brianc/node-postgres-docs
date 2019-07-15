@@ -1,12 +1,12 @@
-import React from "react";
-import { StaticQuery, graphql } from "gatsby";
-import styled from "react-emotion";
-import { ExternalLink } from "react-feather";
-import Link from "./link";
-import './styles.css';
-import config from '../../config';
+import React from 'react'
+import { StaticQuery, graphql } from 'gatsby'
+import styled from 'react-emotion'
+import { ExternalLink } from 'react-feather'
+import Link from './link'
+import './styles.css'
+import config from '../../config'
 
-const forcedNavOrder = config.sidebar.forcedNavOrder;
+const forcedNavOrder = config.sidebar.forcedNavOrder
 
 const Sidebar = styled('aside')`
   width: 100%;
@@ -38,8 +38,7 @@ const Sidebar = styled('aside')`
     background-color: #372476;
     background: #372476;
   }
-  @media (min-width: 767px) and (max-width:1023px)
-  {
+  @media (min-width: 767px) and (max-width: 1023px) {
     padding-left: 0;
   }
   @media only screen and (max-width: 1023px) {
@@ -47,7 +46,7 @@ const Sidebar = styled('aside')`
     position: relative;
     height: auto;
   }
-`;
+`
 
 // eslint-disable-next-line no-unused-vars
 const ListItem = styled(({ className, active, level, ...props }) => {
@@ -56,20 +55,20 @@ const ListItem = styled(({ className, active, level, ...props }) => {
       <li className={className}>
         <Link {...props} />
       </li>
-    );
+    )
   } else if (level === 1) {
-    const customClass = active ? 'active' : '';
+    const customClass = active ? 'active' : ''
     return (
       <li className={'subLevel ' + customClass}>
         <Link {...props} />
       </li>
-    );
+    )
   } else {
     return (
       <li className={className}>
         <Link {...props} />
       </li>
-    );
+    )
   }
 })`
   list-style: none;
@@ -97,7 +96,7 @@ const ListItem = styled(({ className, active, level, ...props }) => {
       margin-right: 1rem;
     }
   }
-`;
+`
 
 const Divider = styled(props => (
   <li {...props}>
@@ -113,7 +112,7 @@ const Divider = styled(props => (
     border: 0;
     border-bottom: 1px solid #ede7f3;
   }
-`;
+`
 
 const SidebarLayout = ({ location }) => (
   <StaticQuery
@@ -125,6 +124,9 @@ const SidebarLayout = ({ location }) => (
               fields {
                 slug
                 title
+                filename {
+                  name
+                }
               }
             }
           }
@@ -134,72 +136,72 @@ const SidebarLayout = ({ location }) => (
     render={({ allMdx }) => {
       const navItems = allMdx.edges
         .map(({ node }) => node.fields.slug)
-        .filter(slug => slug !== "/")
-        .sort()
         .reduce(
           (acc, cur) => {
             if (forcedNavOrder.find(url => url === cur)) {
-              return { ...acc, [cur]: [cur] };
+              return { ...acc, [cur]: [cur] }
             }
 
-            const prefix = cur.split("/")[1];
+            const prefix = cur.split('/')[1]
 
             if (prefix && forcedNavOrder.find(url => url === `/${prefix}`)) {
-              return { ...acc, [`/${prefix}`]: [...acc[`/${prefix}`], cur] };
+              return { ...acc, [`/${prefix}`]: [...acc[`/${prefix}`], cur] }
             } else {
-              return { ...acc, items: [...acc.items, cur] };
+              return { ...acc, items: [...acc.items, cur] }
             }
           },
           { items: [] }
-        );
+        )
 
       const nav = forcedNavOrder
         .reduce((acc, cur) => {
-          return acc.concat(navItems[cur]);
+          return acc.concat(navItems[cur])
         }, [])
         .concat(navItems.items)
         .map(slug => {
-          const { node } = allMdx.edges.find(
-            ({ node }) => node.fields.slug === slug
-          );
+          const { node } = allMdx.edges.find(({ node }) => node.fields.slug === slug)
 
-          let isActive = false;
-          if(location && (location.pathname === node.fields.slug || location.pathname === (config.gatsby.pathPrefix + node.fields.slug)) ) {
-            isActive = true;
+          let isActive = false
+          if (
+            location &&
+            (location.pathname === node.fields.slug ||
+              location.pathname === config.gatsby.pathPrefix + node.fields.slug)
+          ) {
+            isActive = true
           }
 
           return (
             <ListItem
               key={node.fields.slug}
               to={`${node.fields.slug}`}
-              level={node.fields.slug.split("/").length - 2}
+              level={node.fields.slug.split('/').length - 2}
               active={isActive}
             >
               {node.fields.title}
             </ListItem>
-          );
-        });
+          )
+        })
 
       return (
         <Sidebar>
           <ul className={'sideBarUL'}>
             {nav}
             <Divider />
-            {config.sidebar.links.map((link,key) => {
-              if(link.link !== '' && link.text !== '') {
-                return(
+            {config.sidebar.links.map((link, key) => {
+              if (link.link !== '' && link.text !== '') {
+                return (
                   <ListItem key={key} to={link.link}>
                     {link.text}
                     <ExternalLink size={14} />
                   </ListItem>
-                );
+                )
               }
             })}
           </ul>
         </Sidebar>
-      );
+      )
     }}
   />
-);
+)
 
-export default SidebarLayout;
+export default SidebarLayout

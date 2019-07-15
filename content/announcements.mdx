@@ -1,0 +1,56 @@
+## 2017-08-12 - code execution vulnerability
+
+Today [@sehrope](https://github.com/sehrope) found and reported a code execution vulnerability in node-postgres. This affects all versions from `pg@2.x` through `pg@7.1.0`.
+
+I have published a fix on the tip of each major version branch of all affected versions as well as a fix on each minor version branch of `pg@6.x` and `pg@7.x`:
+
+### Fixes
+
+The following versions have been published to npm & contain a patch to fix the vulnerability:
+
+```
+pg@2.11.2
+pg@3.6.4
+pg@4.5.7
+pg@5.2.1
+pg@6.0.5
+pg@6.1.6
+pg@6.2.5
+pg@6.3.3
+pg@6.4.2
+pg@7.0.3
+pg@7.1.2
+```
+
+### Example
+
+To demonstrate the issue & see if you are vunerable execute the following in node:
+
+```js
+const { Client } = require('pg')
+const client = new Client()
+client.connect()
+
+const sql = `SELECT 1 AS "\\'/*", 2 AS "\\'*/\n + console.log(process.env)] = null;\n//"`
+
+client.query(sql, (err, res) => {
+  client.end()
+})
+```
+
+You will see your environment variables printed to your console. An attacker can use this exploit to execute any arbitrary node code within your process.
+
+### Impact
+
+This vulnerability _likely_ does not impact you if you are connecting to a database you control and not executing user-supplied sql. Still, you should **absolutely** upgrade to the most recent patch version as soon as possible to be safe.
+
+Two attack vectors we quickly thought of:
+
+- 1 - executing unsafe, user-supplied sql which contains a malicious column name like the one above.
+- 2 - connecting to an untrusted database and executing a query which returns results where any of the column names are malicious.
+
+### Support
+
+I have created [an issue](https://github.com/brianc/node-postgres/issues/1408) you can use to discuss the vulnerability with me or ask questions, and I have reported this issue [on twitter](https://twitter.com/briancarlson) and directly to Heroku and [nodesecurity.io](https://nodesecurity.io/).
+
+I take security very seriously. If you or your company benefit from node-postgres **[please sponsor my work](https://www.patreon.com/node_postgres)**: this type of issue is one of the many things I am responsible for, and I want to be able to continue to tirelessly provide a world-class PostgreSQL experience in node for years to come.
