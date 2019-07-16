@@ -1,0 +1,1 @@
+{"errors":[{"message":"Cannot query field \"metaTitle\" on type \"MdxFrontmatter\". Did you mean \"title\"?","locations":[{"line":27,"column":7}]},{"message":"Cannot query field \"metaDescription\" on type \"MdxFrontmatter\".","locations":[{"line":28,"column":7}]}],"pageContext":{"isCreatedByStatefulCreatePages":false,"id":"0275f5cc-b71d-5f93-bd9d-e231a85901c5"}}
