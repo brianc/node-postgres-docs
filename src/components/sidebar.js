@@ -54,6 +54,7 @@ const ListSection = styled('li')`
   font-weight: lighter;
   font-size: 14px;
   padding: 0.45rem 0 0.45rem 1rem;
+  cursor: default;
 `
 
 // eslint-disable-next-line no-unused-vars
@@ -143,61 +144,59 @@ const SidebarLayout = ({ location }) => (
     `}
     render={({ allMdx }) => {
       const navItems = allMdx.edges
-        .map(({ node }) => node.fields.slug)
+        .map(({ node }) => node.fields)
         .reduce(
-          (acc, cur) => {
+          (acc, fields) => {
+            const { slug: cur } = fields
+            const newItem = { slug: cur, filename: fields.filename.name }
             if (forcedNavOrder.find(url => url === cur)) {
-              return { ...acc, [cur]: [cur] }
+              return { ...acc, [cur]: [newItem] }
             }
 
             const prefix = cur.split('/')[1]
 
             if (prefix && forcedNavOrder.find(url => url === `/${prefix}`)) {
-              return { ...acc, [`/${prefix}`]: [...acc[`/${prefix}`], cur] }
+              return { ...acc, [`/${prefix}`]: [...acc[`/${prefix}`], newItem] }
             } else {
-              return { ...acc, items: [...acc.items, cur] }
+              return { ...acc, items: [...acc.items, newItem] }
             }
           },
           { items: [] }
         )
 
       const allFields = allMdx.edges.map(({ node }) => node.fields || {})
-      const nav = forcedNavOrder
+      const sortedTree = forcedNavOrder
         .reduce((acc, cur) => {
           return acc.concat(navItems[cur])
         }, [])
         .concat(navItems.items)
-        .map(slug => {
-          const { node } = allMdx.edges.find(({ node }) => node.fields.slug === slug)
-          const containingSlug = allFields.find(({ slug: otherSlug }) => {
-            // is this slug contained within another one (e.g. is this a 'header' slug?)
-            return slug !== '/' && slug !== otherSlug && otherSlug.indexOf(slug) === 0
-          })
-          if (containingSlug) {
-            // nested path
-            return <ListSection key={node.fields.slug}>{node.fields.title}</ListSection>
-          }
 
-          let isActive = false
-          if (
-            location &&
-            (location.pathname === node.fields.slug ||
-              location.pathname === config.gatsby.pathPrefix + node.fields.slug)
-          ) {
-            isActive = true
-          }
-
-          return (
-            <ListItem
-              key={node.fields.slug}
-              to={`${node.fields.slug}`}
-              level={node.fields.slug.split('/').length - 2}
-              active={isActive}
-            >
-              {node.fields.title}
-            </ListItem>
-          )
+      const nav = sortedTree.map(({ slug }) => {
+        const { node } = allMdx.edges.find(({ node }) => node.fields.slug === slug)
+        const containingSlug = allFields.find(({ slug: otherSlug }) => {
+          // is this slug contained within another one (e.g. is this a 'header' slug?)
+          return slug !== '/' && slug !== otherSlug && otherSlug.indexOf(slug) === 0
         })
+        if (containingSlug) {
+          // nested path
+          return <ListSection key={node.fields.slug}>{node.fields.title}</ListSection>
+        }
+
+        const isActive =
+          location &&
+          (location.pathname === node.fields.slug || location.pathname === config.gatsby.pathPrefix + node.fields.slug)
+
+        return (
+          <ListItem
+            key={node.fields.slug}
+            to={`${node.fields.slug}`}
+            level={node.fields.slug.split('/').length - 2}
+            active={isActive}
+          >
+            {node.fields.title}
+          </ListItem>
+        )
+      })
 
       return (
         <Sidebar>

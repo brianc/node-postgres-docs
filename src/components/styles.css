@@ -126,7 +126,7 @@ body {
 }
 .mainWrapper {
   color: rgb(59, 69, 78);
-  max-width: 750px;
+  max-width: 900px;
 }
 .navBarUL li a:hover {
   opacity: 0.7;
