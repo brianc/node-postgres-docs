@@ -5,9 +5,7 @@ import { ExternalLink } from 'react-feather'
 import Link from './link'
 import './styles.css'
 import config from '../../config'
-import { DH_NOT_SUITABLE_GENERATOR } from 'constants'
-
-const forcedNavOrder = config.sidebar.forcedNavOrder
+import getSortedNavItems from '../sortNavItems'
 
 const Sidebar = styled('aside')`
   width: 100%;
@@ -143,41 +141,11 @@ const SidebarLayout = ({ location }) => (
       }
     `}
     render={({ allMdx }) => {
-      const navItems = allMdx.edges
-        .map(({ node }) => node.fields)
-        .reduce(
-          (acc, fields) => {
-            const { slug: cur } = fields
-            const newItem = { slug: cur, filename: fields.filename.name }
-            if (forcedNavOrder.find(url => url === cur)) {
-              return { ...acc, [cur]: [newItem] }
-            }
+      const sortedTree = getSortedNavItems(allMdx)
 
-            const prefix = cur.split('/')[1]
-
-            if (prefix && forcedNavOrder.find(url => url === `/${prefix}`)) {
-              return { ...acc, [`/${prefix}`]: [...acc[`/${prefix}`], newItem] }
-            } else {
-              return { ...acc, items: [...acc.items, newItem] }
-            }
-          },
-          { items: [] }
-        )
-
-      const allFields = allMdx.edges.map(({ node }) => node.fields || {})
-      const sortedTree = forcedNavOrder
-        .reduce((acc, cur) => {
-          return acc.concat(navItems[cur])
-        }, [])
-        .concat(navItems.items)
-
-      const nav = sortedTree.map(({ slug }) => {
+      const nav = sortedTree.map(({ slug, hasChildren }) => {
         const { node } = allMdx.edges.find(({ node }) => node.fields.slug === slug)
-        const containingSlug = allFields.find(({ slug: otherSlug }) => {
-          // is this slug contained within another one (e.g. is this a 'header' slug?)
-          return slug !== '/' && slug !== otherSlug && otherSlug.indexOf(slug) === 0
-        })
-        if (containingSlug) {
+        if (hasChildren) {
           // nested path
           return <ListSection key={node.fields.slug}>{node.fields.title}</ListSection>
         }

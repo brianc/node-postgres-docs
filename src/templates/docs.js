@@ -8,8 +8,7 @@ import { Layout, Link } from '$components'
 import NextPrevious from '../components/NextPrevious'
 import '../components/styles.css'
 import config from '../../config'
-
-const forcedNavOrder = config.sidebar.forcedNavOrder
+import getSortedNavItems from '../sortNavItems'
 
 injectGlobal`
   * {
@@ -82,37 +81,7 @@ export default class MDXRuntimeTest extends Component {
     } = data
     const gitHub = require('../components/images/github.svg')
 
-    const navItems = allMdx.edges
-      .map(({ node }) => node.fields.slug)
-      //.filter(slug => slug !== '/')
-      .sort()
-      .reduce(
-        (acc, cur) => {
-          if (forcedNavOrder.find(url => url === cur)) {
-            return { ...acc, [cur]: [cur] }
-          }
-
-          const prefix = cur.split('/')[1]
-
-          if (prefix && forcedNavOrder.find(url => url === `/${prefix}`)) {
-            return { ...acc, [`/${prefix}`]: [...acc[`/${prefix}`], cur] }
-          } else {
-            return { ...acc, items: [...acc.items, cur] }
-          }
-        },
-        { items: [] }
-      )
-
-    const nav = forcedNavOrder
-      .reduce((acc, cur) => {
-        return acc.concat(navItems[cur])
-      }, [])
-      .concat(navItems.items)
-      .map(slug => {
-        const { node } = allMdx.edges.find(({ node }) => node.fields.slug === slug)
-
-        return { title: node.fields.title, url: node.fields.slug }
-      })
+    const nav = getSortedNavItems(allMdx).filter(x => !x.hasChildren)
 
     // meta tags
     const metaTitle = mdx.frontmatter.metaTitle
@@ -186,6 +155,9 @@ export const pageQuery = graphql`
           fields {
             slug
             title
+            filename {
+              name
+            }
           }
         }
       }
