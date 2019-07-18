@@ -5,6 +5,7 @@ import { ExternalLink } from 'react-feather'
 import Link from './link'
 import './styles.css'
 import config from '../../config'
+import { DH_NOT_SUITABLE_GENERATOR } from 'constants'
 
 const forcedNavOrder = config.sidebar.forcedNavOrder
 
@@ -15,7 +16,6 @@ const Sidebar = styled('aside')`
   height: 100vh;
   overflow: auto;
   position: fixed;
-  padding-left: 24px;
   position: -webkit-sticky;
   position: -moz-sticky;
   position: sticky;
@@ -46,6 +46,14 @@ const Sidebar = styled('aside')`
     position: relative;
     height: auto;
   }
+`
+
+const ListSection = styled('li')`
+  color: white;
+  padding-left: 1rem;
+  font-weight: lighter;
+  font-size: 14px;
+  padding: 0.45rem 0 0.45rem 1rem;
 `
 
 // eslint-disable-next-line no-unused-vars
@@ -153,6 +161,7 @@ const SidebarLayout = ({ location }) => (
           { items: [] }
         )
 
+      const allFields = allMdx.edges.map(({ node }) => node.fields || {})
       const nav = forcedNavOrder
         .reduce((acc, cur) => {
           return acc.concat(navItems[cur])
@@ -160,6 +169,14 @@ const SidebarLayout = ({ location }) => (
         .concat(navItems.items)
         .map(slug => {
           const { node } = allMdx.edges.find(({ node }) => node.fields.slug === slug)
+          const containingSlug = allFields.find(({ slug: otherSlug }) => {
+            // is this slug contained within another one (e.g. is this a 'header' slug?)
+            return slug !== '/' && slug !== otherSlug && otherSlug.indexOf(slug) === 0
+          })
+          if (containingSlug) {
+            // nested path
+            return <ListSection key={node.fields.slug}>{node.fields.title}</ListSection>
+          }
 
           let isActive = false
           if (

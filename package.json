@@ -16,7 +16,7 @@
     "emotion": "^10.0.9",
     "emotion-server": "^10.0.9",
     "emotion-theming": "^10.0.10",
-    "gatsby": "2.4.2",
+    "gatsby": "2.13.23",
     "gatsby-link": "^2.1.1",
     "gatsby-mdx": "^0.6.2",
     "gatsby-plugin-emotion": "3.0.1",
@@ -46,10 +46,12 @@
   "main": "n/a",
   "scripts": {
     "start": "gatsby develop",
-    "build": "gatsby build --prefix-paths"
+    "build": "gatsby build --prefix-paths",
+    "deploy": "yarn build && gh-pages -d public"
   },
   "devDependencies": {
     "gatsby-plugin-remove-trailing-slashes": "^2.0.11",
+    "gh-pages": "2.0.1",
     "prism-react-renderer": "^0.1.6"
   },
   "prettier": {

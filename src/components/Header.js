@@ -56,7 +56,10 @@ const Header = ({ location }) => (
                 </Link>
                 <div>
                   <span className="sponsor">
-                    sponsored by <a className="sponsor-name">Timescale</a>
+                    sponsored by{' '}
+                    <a className="sponsor-name" href="https://www.timescale.com">
+                      Timescale
+                    </a>
                   </span>
                 </div>
               </div>

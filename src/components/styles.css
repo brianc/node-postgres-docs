@@ -177,6 +177,7 @@ pre {
 
 .sideBarUL {
   margin-top: 32px;
+  white-space: nowrap;
 }
 
 .sideBarUL li {
