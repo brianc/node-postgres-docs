@@ -3,7 +3,9 @@ title: pg.Pool
 slug: /api/pool
 ---
 
-## new Pool([config: object])
+## constructor
+
+### new Pool([config: object])
 
 Every field of the `config` object is entirely optional. The config passed to the pool is also passed to every client instance within the pool when the pool creates that client.
 
@@ -186,19 +188,25 @@ pool.end(() => {
 pool.end().then(() => console.log('pool has ended'))
 ```
 
-## `pool.totalCount: int`
+## properties
+
+### `pool.totalCount: int`
 
 The total number of clients existing within the pool.
 
-## `pool.idleCount: int`
+### `pool.idleCount: int`
 
 The number of clients which are not checked out but are currently idle in the pool.
 
-## `pool.waitingCount: int`
+### `pool.waitingCount: int`
 
 The number of queued requests waiting on a client when all clients are checked out. It can be helpful to monitor this number to see if you need to adjust the size of the pool.
 
-## `pool.on('connect', (client: Client) => void) => void`
+## events
+
+`Pool` instances are also instances of [`EventEmitter`](https://nodejs.org/api/events.html).
+
+### `pool.on('connect', (client: Client) => void) => void`
 
 Whenever the pool establishes a new client connection to the PostgreSQL backend it will emit the `connect` event with the newly connected client. This presents an opportunity for you to run setup commands on a client.
 
@@ -209,11 +217,11 @@ pool.on('connect', client => {
 })
 ```
 
-## `pool.on('acquire', (client: Client) => void) => void`
+### `pool.on('acquire', (client: Client) => void) => void`
 
 Whenever the a client is checked out from the pool the pool will emit the `acquire` event with the client that was acquired.
 
-## `pool.on('error', (err: Error, client: Client) => void) => void`
+### `pool.on('error', (err: Error, client: Client) => void) => void`
 
 When a client is sitting idly in the pool it can still emit errors because it is connected to a live backend. If the backend goes down or a network partition is encountered all the idle, connected clients in your application will emit an error _through_ the pool's error event emitter. The error listener is passed the error as the first argument and the client upon which the error occurred as the 2nd argument. The client will be automatically terminated and removed from the pool, it is only passed to the error handler in case you want to inspect it.
 
@@ -223,6 +231,6 @@ When a client is sitting idly in the pool it can still emit errors because it is
   potentially exit.
 </div>
 
-## `pool.on('remove', (client: Client) => void) => void`
+### `pool.on('remove', (client: Client) => void) => void`
 
 Whenever a client is closed & removed from the pool the pool will emit the `remove` event.

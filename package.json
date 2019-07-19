@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-gitbook-boilerplate",
+  "name": "node-postgres-docs",
   "private": true,
-  "description": "Documentation, built with mdx",
-  "author": "Praveen <praveen@hasura.io> (@praveenweb)",
-  "version": "0.0.1",
+  "description": "node-postgres (npm install pg) documentation",
+  "author": "Brian M. Carlson",
+  "version": "1.0.0",
   "dependencies": {
     "@babel/plugin-proposal-export-default-from": "^7.0.0",
     "@emotion/core": "^10.0.10",

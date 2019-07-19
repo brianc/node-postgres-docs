@@ -11,7 +11,9 @@ A cursor can be used to efficiently read through large result sets without loadi
 $ npm install pg pg-cursor
 ```
 
-## `new Cursor(text: String, values: Any[])`
+## constructor
+
+### `new Cursor(text: String, values: Any[])`
 
 Instantiates a new Cursor. A cursor is an instance of `Submittable` and should be passed directly to the `client.query` method.
 
@@ -33,7 +35,9 @@ cursor.read(100, (err, rows) => {
 })
 ```
 
-## `cursor.read(rowCount: Number, callback: (err: Error, rows: Row[], result: pg.Result) => void) => void`
+## read
+
+### `cursor.read(rowCount: Number, callback: (err: Error, rows: Row[], result: pg.Result) => void) => void`
 
 Read `rowCount` rows from the cursor instance. The callback will be called when the rows are available, loaded into memory, parsed, and converted to JavaScript types.
 
@@ -58,6 +62,8 @@ cursor.read(100, (err, rows) => {
   })
 })
 ```
+
+## close
 
 ### `cursor.close(callback: (err: Error) => void) => void`
 

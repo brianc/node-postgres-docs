@@ -7,11 +7,13 @@ The `pg.Result` shape is returned for every successful query.
 
 <div className="alert alert-info">note: you cannot instantiate this directly</div>
 
-## `result.rows: Array<any>`
+## properties
+
+### `result.rows: Array<any>`
 
 Every result will have a rows array. If no rows are returned the array will be empty. Otherwise the array will contain one item for each row returned from the query. By default node-postgres creates a map from the name to value of each column, giving you a json-like object back for each row.
 
-## `result.fields: Array<FieldInfo>`
+### `result.fields: Array<FieldInfo>`
 
 Every result will have a fields array. This array contains the `name` and `dataTypeId` of each field in the result. These fields are ordered in the same order as the columns if you are using `arrayMode` for the query:
 
@@ -31,10 +33,10 @@ console.log(result.rows) // [1, 2]
 await client.end()
 ```
 
-## `result.rowCount: int`
+### `result.rowCount: int`
 
 The number of rows processed by the last command.
 
-## `result.command: string`
+### `result.command: string`
 
 The command type last executed: `INSERT` `UPDATE` `CREATE` `SELECT` etc.
