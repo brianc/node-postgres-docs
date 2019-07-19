@@ -4,7 +4,7 @@ const config = {
     //pathPrefix: '/node-postgres-docs/',
     pathPrefix: '/',
     siteUrl: 'https://node-postgres.com',
-    gaTrackingId: null,
+    gaTrackingId: 'UA-100138145-1',
   },
   header: {
     logo: '',
