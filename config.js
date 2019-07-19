@@ -1,6 +1,7 @@
 const config = {
   gatsby: {
-    pathPrefix: '/node-postgres-docs/',
+    // uncomment this if not hosted at root
+    //pathPrefix: '/node-postgres-docs/',
     siteUrl: 'https://learn.hasura.io',
     gaTrackingId: null,
   },
