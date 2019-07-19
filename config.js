@@ -2,7 +2,8 @@ const config = {
   gatsby: {
     // uncomment this if not hosted at root
     //pathPrefix: '/node-postgres-docs/',
-    siteUrl: 'https://learn.hasura.io',
+    pathPrefix: '/',
+    siteUrl: 'https://node-postgres.com',
     gaTrackingId: null,
   },
   header: {
@@ -21,8 +22,8 @@ const config = {
     title: 'node-postgres',
     description: 'Documentation for node-postgres, the postgres database client for node.js',
     ogImage: null,
-    docsLocation: 'https://github.com/hasura/gatsby-gitbook-boilerplate/tree/master/content',
-    favicon: 'https://graphql-engine-cdn.hasura.io/img/hasura_icon_black.svg',
+    docsLocation: 'https://github.com/brianc/node-postgres-docs/tree/master/content',
+    favicon: '/favicon.ico',
   },
 }
 
