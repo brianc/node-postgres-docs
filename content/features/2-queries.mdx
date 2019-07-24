@@ -129,7 +129,7 @@ Be careful not to fall into the trap of premature optimization.  Most of your qu
 
 ### Row mode
 
-By default node-postgres reads rows and collects them into JavaScript objects with the keys matching the column names and the values matching the corresponding row value for each column. If you do not need or do not want this behavior you can pass `rowMode: 'array'` to a query object. This will inform the result parser to bypass collecting rows into a JavaScript object, and instead will return eacho row as an array of values.
+By default node-postgres reads rows and collects them into JavaScript objects with the keys matching the column names and the values matching the corresponding row value for each column. If you do not need or do not want this behavior you can pass `rowMode: 'array'` to a query object. This will inform the result parser to bypass collecting rows into a JavaScript object, and instead will return each row as an array of values.
 
 ```js
 const query = {
