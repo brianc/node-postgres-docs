@@ -25,6 +25,8 @@ My `db/index.js` file usually starts out like this:
 ```js
 const { Pool } = require('pg')
 
+const pool = new Pool()
+
 module.exports = {
   query: (text, params) => pool.query(text, params),
 }
