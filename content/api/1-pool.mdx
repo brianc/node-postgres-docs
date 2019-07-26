@@ -219,7 +219,7 @@ pool.on('connect', client => {
 
 ### `pool.on('acquire', (client: Client) => void) => void`
 
-Whenever the a client is checked out from the pool the pool will emit the `acquire` event with the client that was acquired.
+Whenever a client is checked out from the pool the pool will emit the `acquire` event with the client that was acquired.
 
 ### `pool.on('error', (err: Error, client: Client) => void) => void`
 
