@@ -152,7 +152,7 @@ module.exports = {
         client.query = query
       }
 
-      callback(err, client, done)
+      callback(err, client, release)
     })
   }
 }
