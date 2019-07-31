@@ -3,7 +3,7 @@ title: Express with async/await
 slug: /guides/async-express
 ---
 
-My preferred way to use node-postgres (and all async code in node.js) is with `async/await`. I find it makes reasoning about control-flow easier and allows me to write more concice and maintainable code.
+My preferred way to use node-postgres (and all async code in node.js) is with `async/await`. I find it makes reasoning about control-flow easier and allows me to write more concise and maintainable code.
 
 This is how I typically structure express web-applications with node-postgres to use `async/await`:
 
