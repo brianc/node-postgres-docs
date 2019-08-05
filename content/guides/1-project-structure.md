@@ -85,7 +85,7 @@ That was pretty quick! And now all of our queries everywhere in our application 
 _note: I didn't log the query parameters.  Depending on your application you might be storing encrypted passwords or other sensitive information in your database.  If you log your query parameters you might accidentally log sensitive information.  Every app is different though so do what suits you best!
 </summary>
 
-Now what if we need to check out a client from the pool to run sever queries in a row in a transaction? We can add another method to our `db/index.js` file when we need to do this:
+Now what if we need to check out a client from the pool to run several queries in a row in a transaction? We can add another method to our `db/index.js` file when we need to do this:
 
 ```js
 const { Pool } = require('pg')
