@@ -3,7 +3,7 @@ title: Transactions
 slug: /features/transactions
 ---
 
-To execute a transaction with node-postgres you simply execute `BEGIN / COMMIT / ROLLBACK` queries yourself through a client. Because node-postgres strives to be low level an un-opinionated it doesn't provide any higher level abstractions specifically around transactions.
+To execute a transaction with node-postgres you simply execute `BEGIN / COMMIT / ROLLBACK` queries yourself through a client. Because node-postgres strives to be low level and un-opinionated, it doesn't provide any higher level abstractions specifically around transactions.
 
 <div class="alert alert-danger">
   You <strong>must</strong> use the <em>same</em> client instance for all statements within a transaction. PostgreSQL
