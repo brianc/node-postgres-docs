@@ -68,7 +68,7 @@ pool
   });
 
 // async/await - check out a client
-(async () => {
+;(async () => {
   const client = await pool.connect()
   try {
     const res = await client.query('SELECT * FROM users WHERE id = $1', [1])
