@@ -10,7 +10,7 @@ PostgreSQL has a rich system of supported [data types](https://www.postgresql.or
 node-postgres will convert a database type to a JavaScript string if it doesn't have a registered type parser for the database type. Furthermore, you can send any type to the PostgreSQL server as a string and node-postgres will pass it through without modifying it in any way. To circumvent the type parsing completely do something like the following.
 
 ```js
-const queryText = 'select int_col::string, date_col::string, json_col::string from my_table'
+const queryText = 'SELECT int_col::text, date_col::text, json_col::text FROM my_table'
 const result = await client.query(queryText)
 
 console.log(result.rows[0]) // will contain the unparsed string value of each column
@@ -67,7 +67,7 @@ await client.query(createTableText)
 
 // insert the current time into it
 const now = new Date()
-const insertText = 'INSERT INTO dates(date_col, timestamp_col, timestamtz_col'
+const insertText = 'INSERT INTO dates(date_col, timestamp_col, timestamtz_col) VALUES ($1, $2, $3)'
 await client.query(insertText, [now, now, now])
 
 // read the row back out
