@@ -65,19 +65,20 @@ pool
         client.release()
         console.log(err.stack)
       })
-  })(
-    // async/await - check out a client
-    async () => {
-      const client = await pool.connect()
-      try {
-        const res = await client.query('SELECT * FROM users WHERE id = $1', [1])
-        console.log(res.rows[0])
-      } finally {
-        client.release()
-      }
-    }
-  )()
-  .catch(e => console.log(e.stack))
+  })
+
+// async/await - check out a client
+;(async () => {
+  const client = await pool.connect()
+  try {
+    const res = await client.query('SELECT * FROM users WHERE id = $1', [1])
+    console.log(res.rows[0])
+  } finally {
+    // Make sure to release the client before any error handling,
+    // just in case the error handling itself throws an error.
+    client.release()
+  }
+})().catch(e => console.log(e.stack))
 ```
 
 <div class='message is-danger'>
