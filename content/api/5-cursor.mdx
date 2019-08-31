@@ -13,7 +13,7 @@ $ npm install pg pg-cursor
 
 ## constructor
 
-### `new Cursor(text: String, values: Any[])`
+### `new Cursor(text: String, values: Any[][, config: CursorQueryConfig])`
 
 Instantiates a new Cursor. A cursor is an instance of `Submittable` and should be passed directly to the `client.query` method.
 
@@ -33,6 +33,17 @@ cursor.read(100, (err, rows) => {
     client.release()
   })
 })
+```
+
+```
+interface CursorQueryConfig {
+  // by default rows come out as a key/value pair for each row
+  // pass the string 'array' here to receive rows as an array of values
+  rowMode?: string;
+
+  // custom type parsers just for this query result
+  types?: Types;
+}
 ```
 
 ## read
