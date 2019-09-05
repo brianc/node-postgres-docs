@@ -63,7 +63,7 @@ const client = new Client()
 client
   .connect()
   .then(() => console.log('connected'))
-  .catch(e => console.error('connection error', err.stack))
+  .catch(err => console.error('connection error', err.stack))
 ```
 
 _note: connect returning a promise only available in pg@7.0 or above_
