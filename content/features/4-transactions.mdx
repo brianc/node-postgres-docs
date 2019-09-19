@@ -80,7 +80,7 @@ const pool = new Pool()
   try {
     await client.query('BEGIN')
     const queryText = 'INSERT INTO users(name) VALUES($1) RETURNING id'
-    const { rows } = await client.query(queryText, ['brianc'])
+    const res = await client.query(queryText, ['brianc'])
 
     const insertPhotoText = 'INSERT INTO photos(user_id, photo_url) VALUES ($1, $2)'
     const insertPhotoValues = [res.rows[0].id, 's3.bucket.foo']
