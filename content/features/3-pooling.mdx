@@ -147,7 +147,7 @@ const pool = new Pool()
 (async () => {
   console.log('starting async query')
   const result = await pool.query('SELECT NOW()')
-  console.log('async query finished)
+  console.log('async query finished')
 
   console.log('starting callback query')
   pool.query('SELECT NOW()', (err, res) => {
