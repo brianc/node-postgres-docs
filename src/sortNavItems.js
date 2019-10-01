@@ -23,14 +23,11 @@ export default function getSortedNavItems(allMdx) {
           slug: cur,
           filename: fields.filename.name,
         }
-        if (forcedNavOrder.find(url => url === cur)) {
-          return { ...acc, [cur]: [newItem] }
-        }
+        
+        const prefix = '/' + cur.split('/')[1]
 
-        const prefix = cur.split('/')[1]
-
-        if (prefix && forcedNavOrder.find(url => url === `/${prefix}`)) {
-          return { ...acc, [`/${prefix}`]: [...acc[`/${prefix}`], { ...newItem }] }
+        if (forcedNavOrder.some(url => url === prefix)) {
+          return { ...acc, [prefix]: [...acc[prefix] || [], { ...newItem }] }
         } else {
           return { ...acc, items: [...acc.items, newItem] }
         }
