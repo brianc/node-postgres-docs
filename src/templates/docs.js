@@ -84,7 +84,7 @@ export default class MDXRuntimeTest extends Component {
     const nav = getSortedNavItems(allMdx).filter(x => !x.hasChildren)
 
     // meta tags
-    const metaTitle = mdx.frontmatter.metaTitle
+    const metaTitle = mdx.fields.title
     const metaDescription = mdx.frontmatter.metaDescription
     let canonicalUrl = config.gatsby.siteUrl
     canonicalUrl = config.gatsby.pathPrefix !== '/' ? canonicalUrl + config.gatsby.pathPrefix : canonicalUrl
@@ -93,7 +93,11 @@ export default class MDXRuntimeTest extends Component {
     return (
       <Layout {...this.props}>
         <Helmet>
-          {metaTitle ? <title>{metaTitle}</title> : null}
+          {metaTitle ? (
+            <title>
+              {metaTitle} | {title}
+            </title>
+          ) : null}
           {metaTitle ? <meta name="title" content={metaTitle} /> : null}
           {metaDescription ? <meta name="description" content={metaDescription} /> : null}
           {metaTitle ? <meta property="og:title" content={metaTitle} /> : null}
