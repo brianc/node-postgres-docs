@@ -98,7 +98,7 @@ Connections to unix sockets can also be made. This can be useful on distros like
 const { Client } = require('pg');
 client = new Client({
     host: '/cloudsql/myproject:zone:mydb'
-    username: 'username',
+    user: 'username',
     password: 'password',
     database: 'database_name',
 });
