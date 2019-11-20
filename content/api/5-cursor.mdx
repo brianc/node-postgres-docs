@@ -68,7 +68,7 @@ cursor.read(100, (err, rows) => {
     throw err
   }
   assert(rows.length == 6)
-  cursor.read(100, (err, res) => {
+  cursor.read(100, (err, rows) => {
     assert(rows.length == 0)
   })
 })
