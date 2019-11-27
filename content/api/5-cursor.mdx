@@ -26,8 +26,8 @@ const client = await pool.connect()
 const text = 'SELECT * FROM my_large_table WHERE something > $1'
 const values = [10]
 
-const cursor = client.query(new Cursor(text, values))
-
+const cursor = new Cursor(text, values)
+const query = client.query(cursor);
 cursor.read(100, (err, rows) => {
   cursor.close(() => {
     client.release()
@@ -62,7 +62,8 @@ const Cursor = require('pg-cursor')
 
 const pool = new Pool()
 const client = await pool.connect()
-const cursor = client.query(new Cursor('select * from generate_series(0, 5)'))
+const cursor = new Cursor('select * from generate_series(0, 5)')
+const query = client.query(cursor);
 cursor.read(100, (err, rows) => {
   if (err) {
     throw err
