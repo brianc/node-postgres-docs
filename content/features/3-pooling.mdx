@@ -146,7 +146,7 @@ To shut down a pool call `pool.end()` on the pool. This will wait for all checke
 const { Pool } = require('pg')
 const pool = new Pool()
 
-(async () => {
+;(async () => {
   console.log('starting async query')
   const result = await pool.query('SELECT NOW()')
   console.log('async query finished')
