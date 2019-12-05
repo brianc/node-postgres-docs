@@ -61,7 +61,7 @@ pool
         client.release()
         console.log(res.rows[0])
       })
-      .catch(e => {
+      .catch(err => {
         client.release()
         console.log(err.stack)
       })
@@ -78,7 +78,7 @@ pool
     // just in case the error handling itself throws an error.
     client.release()
   }
-})().catch(e => console.log(e.stack))
+})().catch(err => console.log(err.stack))
 ```
 
 <div class='message is-danger'>
@@ -115,9 +115,9 @@ const pool = new Pool()
 pool
   .query('SELECT * FROM users WHERE id = $1', [1])
   .then(res => console.log('user:', res.rows[0]))
-  .catch(e =>
+  .catch(err =>
     setImmediate(() => {
-      throw e
+      throw err
     })
   )
 ```
@@ -129,9 +129,9 @@ const { Pool } = require('pg')
 const pool = new Pool()(async () => {
   const { rows } = await pool.query('SELECT * FROM users WHERE id = $1', [1])
   console.log('user:', rows[0])
-})().catch(e =>
+})().catch(err =>
   setImmediate(() => {
-    throw e
+    throw err
   })
 )
 ```
