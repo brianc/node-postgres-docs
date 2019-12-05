@@ -318,7 +318,7 @@ client.on('notification', msg => {
 client.query(`NOTIFY foo, 'bar!'`)
 ```
 
-### client.on('notice', (notice: String) => void) => void
+### client.on('notice', (notice: Error) => void) => void
 
 Used to log out [notice messages](https://www.postgresql.org/docs/9.6/static/plpgsql-errors-and-messages.html) from the PostgreSQL server.
 
