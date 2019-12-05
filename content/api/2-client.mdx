@@ -88,7 +88,7 @@ That is a kinda gross type signature but it translates out to this:
 **Plain text query with a callback:**
 
 ```js
-const { Client } = require('pg').Client
+const { Client } = require('pg')
 const client = new Client()
 client.connect()
 client.query('SELECT NOW()', (err, res) => {
@@ -101,7 +101,7 @@ client.query('SELECT NOW()', (err, res) => {
 **Parameterized query with a callback:**
 
 ```js
-const { Client } = require('pg').Client
+const { Client } = require('pg')
 const client = new Client()
 client.connect()
 client.query('SELECT $1::text as name', ['brianc'], (err, res) => {
@@ -125,7 +125,7 @@ client.query(
 **Plain text query with a promise**
 
 ```js
-const { Client } = require('pg').Client
+const { Client } = require('pg')
 const client = new Client()
 client.connect()
 client
@@ -138,7 +138,7 @@ client
 **Parameterized query with a promise**
 
 ```js
-const { Client } = require('pg').Client
+const { Client } = require('pg')
 const client = new Client()
 client.connect()
 client
