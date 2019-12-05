@@ -127,12 +127,12 @@ module.exports = {
   },
   getClient: (callback) => {
     pool.connect((err, client, done) => {
-      const query = client.query.bind(client)
+      const query = client.query
 
       // monkey patch the query method to keep track of the last query executed
-      client.query = () => {
-        client.lastQuery = arguments
-        client.query.apply(client, arguments)
+      client.query = (...args) => {
+        client.lastQuery = args
+        query.apply(client, args)
       }
 
       // set a timeout of 5 seconds, after which we will log this client's last query
