@@ -132,7 +132,7 @@ module.exports = {
       // monkey patch the query method to keep track of the last query executed
       client.query = (...args) => {
         client.lastQuery = args
-        query.apply(client, args)
+        return query.apply(client, args)
       }
 
       // set a timeout of 5 seconds, after which we will log this client's last query
