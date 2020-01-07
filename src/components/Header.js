@@ -103,7 +103,6 @@ const Header = ({ location }) => (
                 })}
                 <li>
                   <a href="https://github.com/sponsors/brianc" target="_blank" rel="noreferrer">{'❤️ Sponsor'}</a>
-                  test
                 </li>
               </ul>
             </div>
