@@ -45,7 +45,7 @@ const pool = new Pool({
 
 ## pool.connect
 
-### `pool.connect(callback: (err?: Error, client: pg.Client, release: releaseCallback) => void) => void`
+### `pool.connect(callback: (err?: Error, client?: pg.Client, release?: releaseCallback) => void) => void`
 
 Acquires a client from the pool. If the pool is 'full' and all clients are currently checked out, this will wait in a FIFO queue until a client becomes available by it being released back to the pool. If there are idle clients in the pool it will be returned to the callback on `process.nextTick`. If the pool is not full a new client will be created & returned to this callback.
 
