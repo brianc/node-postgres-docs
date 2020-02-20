@@ -577,3 +577,12 @@ span.code {
     transform: scale(1.4);
   }
 }
+
+.sponsors {
+  display: flex;
+  margin-bottom: 30px;
+}
+
+.sponsors .sponsor {
+  flex: 1 1 auto;
+}
