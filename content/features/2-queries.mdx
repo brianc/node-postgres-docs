@@ -63,6 +63,41 @@ try {
 }
 ```
 
+Parameters passed as the second argument to `query()` will be converted to raw data types using the following rules:
+
+**null and undefined**
+
+If parameterizing `null` and `undefined` then both will be converted to `null`.
+
+**Date**
+
+Custom conversion to a UTC date string.
+
+**Buffer**
+
+Buffer instances are unchanged.
+
+**Array**
+
+Converted to a string that describes a Postgres array. Each array item is recurisvely converted using the rules described here.
+
+**Object**
+
+If a parameterized value has the method `toPostgres` then it will be called and its return value will be used in the query.
+The signature of `toPostgres` is the following:
+
+```
+toPostgres (prepareValue: (value) => any): any
+```
+
+The `prepareValue` function provided can be used to convert nested types to raw data types suitable for the database.
+
+Otherwise if no `toPostgres` method is defined then `JSON.stringify` is called on the parameterized value.
+
+**Everything else**
+
+All other parameterized values will be converted by calling `value.toString` on the value.
+
 ## Query config object
 
 `pool.query` and `client.query` both support taking a config object as an argument instead of taking a string and optional array of parameters. The same example above could also be performed like so:
