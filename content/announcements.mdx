@@ -30,6 +30,19 @@ ___
 
 The rest of the changes are relatively minor & you likely wont need to do anything, but good to be aware none the less!
 
+#### change default username
+
+If a user is not specified, available in the environment at `PGUSER`, or available at `pg.defaults`, we used to use the username of the process user as the name of the database. Now we will use the `user` property supplied to the client, if it exists. What this means is this:
+
+```
+new Client({
+  user: 'foo'
+})
+```
+
+`pg@7.x` will default the database name to the _process_ user. `pg@8.x` will use the `user` property supplied to the client. If you have not supplied `user` to the client, and it isn't available through any of its existing lookup mechanisms (environment variables, pg.defaults) then it will still use the process user for the database name.
+
+
 #### drop support for versions of node older than 8.0
 
 Node@6.0 has been out of LTS for quite some time now, and I've removed it from our test matrix.  `pg@8.0` _may_ still work on older versions of node, but it isn't a goal of the project anymore.  Node@8.0 is actually no longer in the LTS support line, but pg will continue to test against and support 8.0 until there is a compelling reason to drop support for it.  Any security vulnerability issues which come up I will back-port fixes to the `pg@7.x` line and do a release, but any other fixes or improvments will not be back ported.
@@ -53,7 +66,6 @@ The code path for parsing `notice` and `error` messages from the postgres backen
 #### monorepo
 
 While not technically a breaking change for the module itself, I have begun the process of [consolidating](https://github.com/brianc/node-pg-query-stream) [separate](https://github.com/brianc/node-pg-cursor/) [repos](https://github.com/brianc/node-pg-pool) into the main [repo](https://github.com/brianc/node-postgres) and converted it into a monorepo managed by lerna.  This will help me stay on top of issues better (it was hard to bounce between 3-4 separate repos) and coordinate bug fixes and changes between dependant modules.
-
 
 Thanks for reading that!  pg tries to be super pedantic about not breaking backwards-compatibility in non semver major releases....even for seemingly small things.  If you ever notice a breaking change on a semver minor/patch release please stop by the [repo](https://github.com/brianc/node-postgres) and open an issue!
 
