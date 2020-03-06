@@ -81,9 +81,7 @@ module.exports = {
 
 That was pretty quick! And now all of our queries everywhere in our application are being logged.
 
-<summary>
-_note: I didn't log the query parameters.  Depending on your application you might be storing encrypted passwords or other sensitive information in your database.  If you log your query parameters you might accidentally log sensitive information.  Every app is different though so do what suits you best!
-</summary>
+_note: I didn't log the query parameters.  Depending on your application you might be storing encrypted passwords or other sensitive information in your database.  If you log your query parameters you might accidentally log sensitive information.  Every app is different though so do what suits you best!_
 
 Now what if we need to check out a client from the pool to run several queries in a row in a transaction? We can add another method to our `db/index.js` file when we need to do this:
 
@@ -109,7 +107,7 @@ module.exports = {
 }
 ```
 
-Okay. Great - the simplesting thing that could possibly work. It seems like one of our routes that checks out a client to run a transaction is forgetting to call `done` in some situation! Oh no! We are leaking a client & have hundreds of these routes to go audit. Good thing we have all our client access going through this single file. Lets add some deeper diagnostic information here to help us track down where the client leak is happening.
+Okay. Great - the simplest thing that could possibly work. It seems like one of our routes that checks out a client to run a transaction is forgetting to call `done` in some situation! Oh no! We are leaking a client & have hundreds of these routes to go audit. Good thing we have all our client access going through this single file. Lets add some deeper diagnostic information here to help us track down where the client leak is happening.
 
 ```js
 const { Pool } = require('pg')
