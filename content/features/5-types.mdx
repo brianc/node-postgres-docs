@@ -67,7 +67,7 @@ await client.query(createTableText)
 
 // insert the current time into it
 const now = new Date()
-const insertText = 'INSERT INTO dates(date_col, timestamp_col, timestamtz_col) VALUES ($1, $2, $3)'
+const insertText = 'INSERT INTO dates(date_col, timestamp_col, timestamptz_col) VALUES ($1, $2, $3)'
 await client.query(insertText, [now, now, now])
 
 // read the row back out
