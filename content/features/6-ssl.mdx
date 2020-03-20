@@ -3,7 +3,7 @@ title: SSL
 slug: /features/ssl
 ---
 
-node-postgres supports TLS/SSL connections to your PostgreSQL server as long as the server is configured to support it. When instantiating a pool or a query you can provide an `ssl` property on the config object and it will be passed to the constructor for the [node TLSSocket](https://nodejs.org/api/tls.html#tls_class_tls_tlssocket).
+node-postgres supports TLS/SSL connections to your PostgreSQL server as long as the server is configured to support it. When instantiating a pool or a client you can provide an `ssl` property on the config object and it will be passed to the constructor for the [node TLSSocket](https://nodejs.org/api/tls.html#tls_class_tls_tlssocket).
 
 ## Self-signed cert
 
