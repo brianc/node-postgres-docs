@@ -83,7 +83,7 @@ pool
 
 <div class='message is-danger'>
   <div class='message-body'>
-    You must __always__ return the client to the pool if you successfully check it out, regardless of whether or not there was an error with the queries you ran on the client.  If you don't check in the client your application will leak them and eventually your pool will be empty forever and all future requests to check out a client from the pool will wait forever.
+    You must <b>always</b> return the client to the pool if you successfully check it out, regardless of whether or not there was an error with the queries you ran on the client.  If you don't check in the client your application will leak them and eventually your pool will be empty forever and all future requests to check out a client from the pool will wait forever.
   </div>
 </div>
 
