@@ -17,11 +17,11 @@ const client = new Client({ ssl: true })
 ```
 
 <div class="alert alert-danger" style="margin-top: 20px">
-Now we will use the default ssl options to tls.connect which includes `rejectUnauthorized` being enabled.  This means your connection attempt may fail if you are using a self-signed cert.  To use the old behavior you should do this:
+Now we will use the default ssl options to tls.connect which includes rejectUnauthorized being enabled.  This means your connection attempt may fail if you are using a self-signed cert.  To use the old behavior you should do this:
 </div>
 
 ```
-const client = new Client({ ssl: { rejectUnauthorized: false }})
+const client = new Client({ ssl: { rejectUnauthorized: false } })
 ```
 
 This makes pg a bit more secure "out of the box" while still enabling you to opt in to the old behavior.
@@ -30,9 +30,9 @@ ___
 
 The rest of the changes are relatively minor & you likely wont need to do anything, but good to be aware none the less!
 
-#### change default username
+#### change default database name
 
-If a user is not specified, available in the environment at `PGUSER`, or available at `pg.defaults`, we used to use the username of the process user as the name of the database. Now we will use the `user` property supplied to the client, if it exists. What this means is this:
+If a database name is not specified, available in the environment at `PGDATABASE`, or available at `pg.defaults`, we used to use the username of the process user as the name of the database. Now we will use the `user` property supplied to the client as the database name, if it exists. What this means is this:
 
 ```
 new Client({
