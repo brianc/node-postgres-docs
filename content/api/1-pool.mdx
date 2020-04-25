@@ -87,7 +87,7 @@ const pool = new Pool()
   <span className="code">client.release</span> (which points to the <span className="code">releaseCallback</span>) when
   you are finished with a client. If you forget to release the client then your application will quickly exhaust
   available, idle clients in the pool and all further calls to <span className="code">pool.connect</span> will timeout
-  with an error or hang indefinitely if you have <span className="code">connectionTimeoutMills</span> configured to 0.
+  with an error or hang indefinitely if you have <span className="code">connectionTimeoutMillis</span> configured to 0.
 </div>
 
 ## releaseCallback
