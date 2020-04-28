@@ -33,10 +33,6 @@ export default class Footer extends Component {
               @briancarlson
             </a>
           </span>
-          <span style={{ margin: 5 }}>|</span>
-          <span>
-            sponsored by <a href="https://www.timescale.com">Timescale</a>
-          </span>
         </div>
       </div>
     )
