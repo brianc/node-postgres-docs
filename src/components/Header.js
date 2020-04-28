@@ -53,14 +53,6 @@ const Header = ({ location }) => (
                 <Link to="/" className={'navbar-brand navBarBrand'}>
                   {headerTitle}
                 </Link>
-                <div>
-                  <span className="sponsor">
-                    sponsored by{' '}
-                    <a className="sponsor-name" href="https://www.timescale.com">
-                      Timescale
-                    </a>
-                  </span>
-                </div>
               </div>
             </div>
             <div id="navbar" className={'navbar-collapse collapse navBarCollapse'}>
@@ -102,7 +94,9 @@ const Header = ({ location }) => (
                   }
                 })}
                 <li>
-                  <a href="https://github.com/sponsors/brianc" target="_blank" rel="noreferrer">{'❤️ Sponsor'}</a>
+                  <a href="https://github.com/sponsors/brianc" target="_blank" rel="noreferrer">
+                    {'❤️ Sponsor'}
+                  </a>
                 </li>
               </ul>
             </div>
