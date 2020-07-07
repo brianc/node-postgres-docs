@@ -92,7 +92,7 @@ const SidebarLayout = ({ location }) => (
                   return (
                     <ListItem
                       key={index}
-                      to={`#${innerItem.title}`}
+                      to={innerItem.url}
                       level={1}
                     >
                       {innerItem.title}
