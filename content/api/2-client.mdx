@@ -13,6 +13,7 @@ Every field of the `config` object is entirely optional. A `Client` instance wil
 config = {
   user?: string, // default process.env.PGUSER || process.env.USER
   password?: string, //default process.env.PGPASSWORD
+  host?: string, // default process.env.PGHOST
   database?: string, // default process.env.PGDATABASE || process.env.USER
   port?: number, // default process.env.PGPORT
   connectionString?: string, // e.g. postgres://user:password@host:5432/database
@@ -20,6 +21,7 @@ config = {
   types?: any, // custom type parsers
   statement_timeout?: number, // number of milliseconds before a statement in query will time out, default is no timeout
   query_timeout?: number, // number of milliseconds before a query call will timeout, default is no timeout
+  connectionTimeoutMillis?: number, // number of milliseconds to wait for connection, default is no timeout
 }
 ```
 
