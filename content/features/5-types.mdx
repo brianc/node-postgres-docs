@@ -97,6 +97,6 @@ _note: I generally use `TIMESTAMPTZ` when storing dates; otherwise, inserting a 
 
 <div class='message is-warning'>
   <div class='message-body'>
-    Although PostgreSQL supports microseconds in dates, JavaScript only supports dates to the millisecond precision.  Keep this in mind when you send dates to and from PostgreSQL from node: your milliseconds will be truncated when converting to a JavaScript date object even if they exist in the database.  If you need to preserve them, I recommend using a custom type parser.
+    Although PostgreSQL supports microseconds in dates, JavaScript only supports dates to the millisecond precision.  Keep this in mind when you send dates to and from PostgreSQL from node: your microseconds will be truncated when converting to a JavaScript date object even if they exist in the database.  If you need to preserve them, I recommend using a custom type parser.
   </div>
 </div>
