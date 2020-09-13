@@ -32,9 +32,9 @@ This is the simplest possible way to connect, query, and disconnect with async/a
 
 ```js
 const { Client } = require('pg')
-const client = new Client()
+const client = new Client();
 
-;(async () => {
+(async () => {
   await client.connect()
 
   const res = await client.query('SELECT $1::text as message', ['Hello world!'])
