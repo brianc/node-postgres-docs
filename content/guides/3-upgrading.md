@@ -1,7 +1,25 @@
 ---
-title: Upgrading to 7.0
+title: Upgrading
 slug: /guides/upgrading
 ---
+
+# Upgrading to 8.0
+
+node-postgres at 8.0 introduces a breaking change to ssl-verified connetions.  If you connect with ssl and use
+
+```
+const client = new Client({ ssl: true })
+```
+
+and the server's SSL certificate is self-signed, connections will fail as of node-postgres 8.0.  To keep the existing behavior, modify the invocation to
+
+```
+const client = new Client({ ssl: { rejectUnauthorized: false } })
+```
+
+The rest of the changes are relatively minor and unlikely to cause issues; see [the announcement](/announcements#2020-02-25) for full details.
+
+# Upgrading to 7.0
 
 node-postgres at 7.0 introduces somewhat significant breaking changes to the public API.
 
