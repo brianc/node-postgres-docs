@@ -22,6 +22,7 @@ config = {
   statement_timeout?: number, // number of milliseconds before a statement in query will time out, default is no timeout
   query_timeout?: number, // number of milliseconds before a query call will timeout, default is no timeout
   connectionTimeoutMillis?: number, // number of milliseconds to wait for connection, default is no timeout
+  idle_in_transaction_session_timeout?: number // number of milliseconds before terminating any session with an open idle connection, default is no timeout
 }
 ```
 
