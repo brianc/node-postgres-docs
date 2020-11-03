@@ -113,7 +113,7 @@ const { Pool, Client } = require('pg')
 const connectionString = 'postgresql://dbuser:secretpassword@database.server.com:3211/mydb'
 
 const pool = new Pool({
-  connectionString: connectionString,
+  connectionString,
 })
 
 pool.query('SELECT NOW()', (err, res) => {
@@ -122,7 +122,7 @@ pool.query('SELECT NOW()', (err, res) => {
 })
 
 const client = new Client({
-  connectionString: connectionString,
+  connectionString,
 })
 client.connect()
 
