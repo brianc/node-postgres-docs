@@ -5,7 +5,7 @@ slug: /guides/upgrading
 
 # Upgrading to 8.0
 
-node-postgres at 8.0 introduces a breaking change to ssl-verified connetions.  If you connect with ssl and use
+node-postgres at 8.0 introduces a breaking change to ssl-verified connections.  If you connect with ssl and use
 
 ```
 const client = new Client({ ssl: true })
