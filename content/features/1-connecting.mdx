@@ -90,6 +90,20 @@ client.query('SELECT NOW()', (err, res) => {
 })
 ```
 
+Many cloud providers also provide alternative methods of connecting to database instances using short-lived authentication tokens.  node-postgres supports dynamic passwords via a callback function, either synchronous or asynchronous.  The callback function must resolve to a string.
+
+```
+
+const pool = new pg.Pool({
+    host: 'db.example.com',
+    port: 5432,
+    user: 'user',
+    database: 'my-db',
+    password: async () => 'random-' + Date.now(),
+});
+
+```
+
 ### Programmatic Connection to Sockets
 
 Connections to unix sockets can also be made. This can be useful on distros like Ubuntu, where authentication is managed via the socket connection instead of a password.
