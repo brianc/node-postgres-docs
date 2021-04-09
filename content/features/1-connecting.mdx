@@ -99,17 +99,16 @@ const { RDS } = require('aws-sdk')
 const signerOptions = {
   credentials: {
     accessKeyId: 'YOUR-ACCESS-KEY',
-    secretAccessKey: 'YOUR-SECRET-ACCESS-KEY'
+    secretAccessKey: 'YOUR-SECRET-ACCESS-KEY',
   },
   region: 'us-east-1',
   hostname: 'example.aslfdewrlk.us-east-1.rds.amazonaws.com',
   port: 5432,
-  username: 'api-user'
+  username: 'api-user',
 }
 
 const signer = new RDS.Signer()
 
-/** @returns {string} */
 const getPassword = () => signer.getAuthToken(signerOptions)
 
 const pool = new Pool({
@@ -118,7 +117,7 @@ const pool = new Pool({
   user: signerOptions.username,
   database: 'my-db',
   password: getPassword,
-});
+})
 ```
 
 ### Programmatic Connection to Sockets
