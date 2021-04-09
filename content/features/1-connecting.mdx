@@ -90,18 +90,35 @@ client.query('SELECT NOW()', (err, res) => {
 })
 ```
 
-Many cloud providers also provide alternative methods of connecting to database instances using short-lived authentication tokens.  node-postgres supports dynamic passwords via a callback function, either synchronous or asynchronous.  The callback function must resolve to a string.
+Many cloud providers include alternative methods for connecting to database instances using short-lived authentication tokens.  node-postgres supports dynamic passwords via a callback function, either synchronous or asynchronous.  The callback function must resolve to a string.
 
-```
+```js
+const { Pool } = require('pg')
+const { RDS } = require('aws-sdk')
 
-const pool = new pg.Pool({
-    host: 'db.example.com',
-    port: 5432,
-    user: 'user',
-    database: 'my-db',
-    password: async () => 'random-' + Date.now(),
+const signerOptions = {
+  credentials: {
+    accessKeyId: 'YOUR-ACCESS-KEY',
+    secretAccessKey: 'YOUR-SECRET-ACCESS-KEY'
+  },
+  region: 'us-east-1',
+  hostname: 'example.aslfdewrlk.us-east-1.rds.amazonaws.com',
+  port: 5432,
+  username: 'api-user'
+}
+
+const signer = new RDS.Signer()
+
+/** @returns {string} */
+const getPassword = () => signer.getAuthToken(signerOptions)
+
+const pool = new Pool({
+  host: signerOptions.hostname,
+  port: signerOptions.port,
+  user: signerOptions.username,
+  database: 'my-db',
+  password: getPassword,
 });
-
 ```
 
 ### Programmatic Connection to Sockets
