@@ -76,6 +76,6 @@ cursor.read(100, (err, rows) => {
 
 ## close
 
-### `cursor.close(callback: (err: Error) => void) => void`
+### `cursor.close(callback: () => void) => void`
 
 Used to close the cursor early. If you want to stop reading from the cursor before you get all of the rows returned, call this.
