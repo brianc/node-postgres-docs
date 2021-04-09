@@ -90,7 +90,7 @@ client.query('SELECT NOW()', (err, res) => {
 })
 ```
 
-Many cloud providers include alternative methods for connecting to database instances using short-lived authentication tokens.  node-postgres supports dynamic passwords via a callback function, either synchronous or asynchronous.  The callback function must resolve to a string.
+Many cloud providers include alternative methods for connecting to database instances using short-lived authentication tokens. node-postgres supports dynamic passwords via a callback function, either synchronous or asynchronous. The callback function must resolve to a string.
 
 ```js
 const { Pool } = require('pg')
