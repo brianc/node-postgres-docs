@@ -12,7 +12,7 @@ Every field of the `config` object is entirely optional. A `Client` instance wil
 ```flow
 config = {
   user?: string, // default process.env.PGUSER || process.env.USER
-  password?: string, //default process.env.PGPASSWORD
+  password?: string or function, //default process.env.PGPASSWORD
   host?: string, // default process.env.PGHOST
   database?: string, // default process.env.PGDATABASE || process.env.USER
   port?: number, // default process.env.PGPORT
