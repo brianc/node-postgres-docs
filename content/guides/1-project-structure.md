@@ -49,11 +49,11 @@ That's it. But now everywhere else in my application instead of requiring `pg` d
 const db = require('../db')
 
 app.get('/:id', (req, res, next) => {
-  db.query('SELECT * FROM users WHERE id = $1', [req.params.id], (err, res) => {
+  db.query('SELECT * FROM users WHERE id = $1', [req.params.id], (err, result) => {
     if (err) {
       return next(err)
     }
-    res.send(res.rows[0])
+    res.send(result.rows[0])
   })
 })
 
