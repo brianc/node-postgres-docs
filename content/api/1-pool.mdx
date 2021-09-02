@@ -26,6 +26,17 @@ config = {
   // maximum number of clients the pool should contain
   // by default this is set to 10.
   max?: int,
+  
+  // Default behavior is the pool will keep clients open & connected to the backend 
+  // until idleTimeoutMillis expire for each client and node will maintain a ref 
+  // to the socket on the client, keeping the event loop alive until all clients are closed 
+  // after being idle or the pool is manually shutdown with `pool.end()`.
+  //
+  // Setting `allowExitOnIdle: true` in the config will allow the node event loop to exit 
+  // as soon as all clients in the pool are idle, even if their socket is still open 
+  // to the postgres server.  This can be handy in scripts & tests 
+  // where you don't want to wait for your clients to go idle before your process exits.
+  allowExitOnIdle?: boolean
 }
 ```
 
