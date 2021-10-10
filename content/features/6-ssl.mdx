@@ -44,3 +44,18 @@ pool
   .catch(err => console.error('error connecting', err.stack))
   .then(() => pool.end())
 ```
+
+## Usage with `connectionString`
+
+If you plan to use a combination of a database connection string from the environment and SSL settings in the config object directly, then you must avoid including any of `sslcert`, `sslkey`, `sslrootcert`, or `sslmode` in the connection string. If any of these options are used then the `ssl` object is replaced and any additional options provided there will be lost.
+
+```js
+const config = {
+  connectionString: 'postgres://user:password@host:port/db?sslmode=require',
+  // Beware! The ssl object is overwritten when parsing the connectionString
+  ssl: {
+    rejectUnauthorized: false,
+    ca: fs.readFileSync('/path/to/server-certificates/root.crt').toString(),
+  },
+}
+```
