@@ -172,7 +172,7 @@ By default node-postgres reads rows and collects them into JavaScript objects wi
 
 ```js
 const query = {
-  text: 'SELECT $1::text as first_name, select $2::text as last_name',
+  text: 'SELECT $1::text as first_name, $2::text as last_name',
   values: ['Brian', 'Carlson'],
   rowMode: 'array',
 }
