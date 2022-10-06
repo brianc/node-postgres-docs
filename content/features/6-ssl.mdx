@@ -59,3 +59,23 @@ const config = {
   },
 }
 ```
+
+## Note
+With Sequelize you may actually need to store the SSL information one level below the other connection information, under dialectOptions, like this:
+
+```js
+const config = {
+  username:,
+  password:,
+  database:,
+  host:,
+  dialect: "postgres",
+  dialectOptions: {
+    ssl: {
+      rejectUnauthorized: true,
+      ca: process.env.CA_CERT,
+    },
+  },
+  logging:
+}
+```
