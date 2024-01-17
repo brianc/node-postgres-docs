@@ -49,10 +49,24 @@ pool
 
 If you plan to use a combination of a database connection string from the environment and SSL settings in the config object directly, then you must avoid including any of `sslcert`, `sslkey`, `sslrootcert`, or `sslmode` in the connection string. If any of these options are used then the `ssl` object is replaced and any additional options provided there will be lost.
 
+Here's an example in that the CA file passed as parameter won't work due to the `sslmode=require` in `connectionString`:
 ```js
 const config = {
   connectionString: 'postgres://user:password@host:port/db?sslmode=require',
   // Beware! The ssl object is overwritten when parsing the connectionString
+  // If it is a self signed certificate, probably will yield to `self signed certificate in certificate chain` error
+  ssl: {
+    rejectUnauthorized: false,
+    ca: fs.readFileSync('/path/to/server-certificates/root.crt').toString(),
+  },
+}
+```
+
+But this will work:
+```js
+const config = {
+  connectionString: 'postgres://user:password@host:port/db',
+  // The ssl object won't be overwritten because there are no config ssl on connectionString
   ssl: {
     rejectUnauthorized: false,
     ca: fs.readFileSync('/path/to/server-certificates/root.crt').toString(),
